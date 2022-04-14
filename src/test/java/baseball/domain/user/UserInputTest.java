@@ -1,12 +1,10 @@
-package baseball.game;
+package baseball.domain.user;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -19,11 +17,9 @@ class UserInputTest {
         System.setIn(in);
 
         UserInput userInput = new UserInput();
-        List<String> userInputList = userInput.getUserInputList();
-
-        assertThat(userInputList)
+        assertThat(userInput.getUserInput())
                 .isNotEmpty()
-                .containsAll(Arrays.asList(input.split("")));
+                .isEqualTo(input);
     }
 
     @ParameterizedTest
@@ -34,7 +30,7 @@ class UserInputTest {
 
         UserInput userInput = new UserInput();
         assertThatThrownBy(() -> {
-            userInput.getUserInputList();
+            userInput.getUserInput();
         }).isInstanceOf(IllegalArgumentException.class)
                 .as("예외발생");
     }
