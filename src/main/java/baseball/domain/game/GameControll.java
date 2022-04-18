@@ -5,6 +5,9 @@ import baseball.domain.user.UserInput;
 import camp.nextstep.edu.missionutils.Console;
 
 public class GameControll {
+    private final static String SUCCESS_TXT = "3개의 숫자를 모두 맞히셨습니다! 게임종료";
+    private final static String REPLAY_TXT = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
+    private final static String STRIKE_TXT = "3스트라이크";
 
     private final BaseballNumber baseballNumber;
     private final UserInput userInput;
@@ -19,20 +22,18 @@ public class GameControll {
     public String start() {
         baseballNumber.generate();
         String answer = baseballNumber.getNumbers();
-//        System.out.println("answer = " + answer);
         String result = "";
 
-        while (!"3스트라이크".equals(result)) {
-            String input = userInput.getUserInput();
-            result = judgement.judge(answer, input);
+        while (!STRIKE_TXT.equals(result)) {
+            result = judgement.judge(answer, userInput.getUserInput());
             System.out.println(result);
         }
-        System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임종료");
+        System.out.println(SUCCESS_TXT);
         return replay();
     }
 
     public String replay() {
-        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        System.out.println(REPLAY_TXT);
         String input = Console.readLine();
         validateUserInput(input);
         return input;

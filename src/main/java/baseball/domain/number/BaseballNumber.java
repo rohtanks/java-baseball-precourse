@@ -30,11 +30,4 @@ public class BaseballNumber {
             throw new IllegalArgumentException("count cannot be greater than the input range.");
         }
     }
-
-    @Override
-    public String toString() {
-        return "BaseballNumber{" +
-                "numbers='" + numbers + '\'' +
-                '}';
-    }
 }
